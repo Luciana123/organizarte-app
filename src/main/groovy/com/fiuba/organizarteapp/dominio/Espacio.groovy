@@ -19,7 +19,7 @@ class Espacio {
     def crearTareas(Hogar h, LocalDate hoy) {
         // Crear tareas SOLO crea las tareas que no fueron creadas con
         // anterioridad, es decir, las tareas nuevas.
-        var tipoTareasCreadas = tareas.each {it.tipo}
+        var tipoTareasCreadas = tareas.each { it.tipo }
         tipo.tipoTareas.findAll {
             !tipoTareasCreadas.contains(it)
         }.each {

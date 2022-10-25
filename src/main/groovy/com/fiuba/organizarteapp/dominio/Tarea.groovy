@@ -20,13 +20,14 @@ class Tarea {
         this.fechaVencimiento = hoy.plusDays(tipo.periodicidad)
 
         if (tipo.tipoEspacio == null) {
-            throw new TareaInvalidaException("Se está intentando crear " +
-                    "una tarea para un espacio, cuando la tarea no pertenece a ningún espacio.")
+            throw new TareaInvalidaException("""Se está intentando crear 
+                    una tarea para un espacio, cuando la tarea 
+                    no pertenece a ningún espacio.""")
         }
 
         if (tipo.tipoEspacio != espacio.tipo) {
-            throw new TareaInvalidaException("Se está intentando crear " +
-                    "una tarea para un espacio incorrecto.")
+            throw new TareaInvalidaException("""Se está intentando crear 
+                    una tarea para un espacio incorrecto.""")
         }
 
         this.espacio = espacio

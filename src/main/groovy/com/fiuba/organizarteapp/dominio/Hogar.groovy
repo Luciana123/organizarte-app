@@ -13,19 +13,18 @@ class Hogar {
     Set<Espacio> espacios = []
     Set<Tarea> tareas = []
 
-    Organizador organizador
+    Competencia competenciaEnCurso = null
 
     Hogar(Integrante administrador, String nombre) {
         this.nombre = nombre
         // Primer integrante de la casa es el administrador.
         this.administradores.add(administrador)
         this.integrantes.add(administrador)
-        this.organizador = new Organizador()
     }
 
     def agregarTipoTarea(TipoTarea t) {
 
-        if(t.tipoEspacio != null) {
+        if (t.tipoEspacio != null) {
             throw new TareaInvalidaException("No se puede agreagar un tipo de tarea " +
                     "al hogar que sea relativa a un espacio, las tareas" +
                     "del hogar solo pueden ser tareas sin tipos de espacios asignados.")
@@ -60,8 +59,20 @@ class Hogar {
 
     def siguienteIntegrante(Integrante i) {
         Integer idx = integrantes.indexOf(i)
-        Integrante next =  integrantes.get(idx + 1 % integrantes.size())
+        Integrante next = integrantes.get(idx + 1 % integrantes.size())
         return next
+    }
+
+    def empezarCompetencia(LocalDate hoy) {
+        competenciaEnCurso = new Competencia()
+        competenciaEnCurso.empezarCompetencia(this, hoy)
+        integrantes.each {
+            it.empezarCompetencia()
+        }
+    }
+
+    def finalizarCompetencia() {
+        competenciaEnCurso = null
     }
 
 

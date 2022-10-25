@@ -5,7 +5,7 @@ import java.time.LocalDate
 class Organizador {
 
     // Job encargado de avanzar el día cuando son las 00:00 para actualizar las tareas en el hogar.
-    def avanzarDia(Hogar h, LocalDate hoy){
+    def avanzarDia(Hogar h, LocalDate hoy) {
         // Se actualizan todas las tareas a las 00:00 hs de cada dia.
 
         // Actualizo tareas
@@ -17,16 +17,21 @@ class Organizador {
         // con nueva fecha de vencimiento.
         // La asigno al siguiente participante.
         List<Tarea> nuevasTareas = []
-        h.tareas.findAll{
+        h.tareas.findAll {
             it.estado == Estado.Finalizada
         }.each {
+
             Tarea t = new Tarea(it.nombre, it.tipo, it.espacio, hoy)
+            t.asignado.sumarPuntos(t.puntos)
+
             t.asignar(h.siguienteIntegrante(it.asignado))
             nuevasTareas.add(new Tarea(it.nombre, it.tipo, it.espacio, hoy))
         }
 
         // Borro tareas finalizadas
-        h.tareas.removeAll{it.fechaVencimiento > hoy && it.estado == Estado.Realizada}
+        h.tareas.removeAll { it.fechaVencimiento > hoy && it.estado == Estado.Realizada }
+
+        h.competenciaEnCurso.each { it.actualizar(hoy) }
 
     }
 
