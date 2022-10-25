@@ -2,8 +2,8 @@ package com.fiuba.organizarteapp.dominio
 
 class Competencia {
 
-    List tareas = []
-    List integrantes = []
+    List<Tarea> tareas = []
+    List<Integrante> integrantes = []
 
     EstadoCompetencia estadoCompetencia
 

@@ -2,9 +2,9 @@ package com.fiuba.organizarteapp.dominio
 
 class TipoEspacio {
     String nombre
-    List tareas = []
+    List<TipoTarea> tipoTareas = []
 
     def agregarPlantillaDeTarea(TipoTarea tarea) {
-        tareas.add(tarea)
+        tipoTareas.add(tarea)
     }
 }

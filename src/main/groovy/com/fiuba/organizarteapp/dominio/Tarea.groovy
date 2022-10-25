@@ -15,7 +15,7 @@ class Tarea {
     Estado estado
     Integrante asignado
 
-    Tarea(nombre, TipoTarea tipo, Espacio espacio, LocalDate hoy) {
+    Tarea(String nombre, TipoTarea tipo, Espacio espacio, LocalDate hoy) {
         this.nombre = nombre
         this.fechaVencimiento = hoy.plusDays(tipo.periodicidad)
 
@@ -47,6 +47,11 @@ class Tarea {
         if (this.fechaVencimiento > today && this.estado != Estado.Realizada) {
             puntos = this.puntos + 1
             this.fechaVencimiento = today.plusDays(tipo.periodicidad)
+        }
+
+        // Si la tarea ya venció y está realizada, la finalizo
+        if (this.fechaVencimiento > today && this.estado == Estado.Realizada) {
+            this.estado = Estado.Finalizada
         }
     }
 

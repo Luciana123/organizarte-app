@@ -1,12 +1,17 @@
 package com.fiuba.organizarteapp.dominio
 
+import com.fiuba.organizarteapp.dominio.excepciones.TareaInvalidaException
+
+import java.time.LocalDate
+
 class Hogar {
 
     String nombre
-    List integrantes = []
-    Set administradores = []
-    Set espacios = []
-    Set tareas = []
+    List<Integrante> integrantes = []
+    Set<Integrante> administradores = []
+    Set<TipoTarea> tipoTareas = []
+    Set<Espacio> espacios = []
+    Set<Tarea> tareas = []
 
     Organizador organizador
 
@@ -18,8 +23,15 @@ class Hogar {
         this.organizador = new Organizador()
     }
 
-    def agregarTarea(Tarea t) {
-        this.tareas.add(t)
+    def agregarTipoTarea(TipoTarea t) {
+
+        if(t.tipoEspacio != null) {
+            throw new TareaInvalidaException("No se puede agreagar un tipo de tarea " +
+                    "al hogar que sea relativa a un espacio, las tareas" +
+                    "del hogar solo pueden ser tareas sin tipos de espacios asignados.")
+        }
+
+        this.tipoTareas.add(t)
     }
 
     def agregarIntegrante(Integrante integrante) {
@@ -38,5 +50,19 @@ class Hogar {
     def esAdmin(Integrante i) {
         return this.administradores.contains(i)
     }
+
+    def crearTareasDeHogar(LocalDate hoy) {
+        tipoTareas.each {
+            var nombreTareaDeHogar = this.nombre + "-" + it.nombre
+            tareas.add(new Tarea(nombreTareaDeHogar, it, hoy))
+        }
+    }
+
+    def siguienteIntegrante(Integrante i) {
+        Integer idx = integrantes.indexOf(i)
+        Integrante next =  integrantes.get(idx + 1 % integrantes.size())
+        return next
+    }
+
 
 }

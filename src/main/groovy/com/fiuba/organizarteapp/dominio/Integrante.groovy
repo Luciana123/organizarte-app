@@ -1,5 +1,6 @@
 package com.fiuba.organizarteapp.dominio
 
+import com.fiuba.organizarteapp.dominio.excepciones.EspacioInvalidoException
 import com.fiuba.organizarteapp.dominio.excepciones.OperacionNoPermitidaException
 import com.fiuba.organizarteapp.dominio.excepciones.TareaInvalidaException
 
@@ -41,10 +42,11 @@ class Integrante {
         }
     }
 
-    def crearEspacio(String nombre, Integer cmCuadrados, List tipoTareas) {
-        var tipoEspacio = new TipoEspacio(nombre, tipoTareas)
-        return new Espacio(nombre, )
-
+    def crearEspacio(String nombre, Integer cmCuadrados, TipoEspacio tipoEspacio) {
+        if(cmCuadrados < 0) {
+            throw new EspacioInvalidoException("Los cmCuadrados de un espacio no pueden ser menores a 0")
+        }
+        hogar.agregarEspacio(new Espacio(nombre, cmCuadrados, tipoEspacio))
     }
 
 }

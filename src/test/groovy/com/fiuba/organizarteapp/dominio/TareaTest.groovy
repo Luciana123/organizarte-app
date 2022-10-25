@@ -7,8 +7,10 @@ import java.time.LocalDate
 
 class TareaTest extends Specification {
 
-    def setup() {
+    LocalDate hoy
 
+    def setup() {
+        hoy = LocalDate.parse("2022-10-01")
     }
 
     void "Creacion de tarea"() {
@@ -18,11 +20,11 @@ class TareaTest extends Specification {
                 7, 5, 5, tipoEspacio)
 
         when: "una instancia de tarea es creada"
-        var livingPrincipal = new Espacio(nombre: "Living principal", cmCuadrados: 90, tipo: tipoEspacio)
-        def tareaCreada = new Tarea("Trapear el living", tipoTareaTrapear, livingPrincipal, LocalDate.parse("2022-10-02"))
+        var livingPrincipal = new Espacio("Living principal", 90, tipoEspacio)
+        def tareaCreada = new Tarea("Trapear el living", tipoTareaTrapear, livingPrincipal, hoy)
 
         then: "la tarea toma puntos de acuerdo al espacio"
-        assert tareaCreada.puntos == 11
+        assert tareaCreada.puntos == 14
     }
 
     void "Creacion de tarea en un espacio incorrecto"() {
@@ -33,7 +35,7 @@ class TareaTest extends Specification {
                 7, 5, 5, tipoEspacioLiving)
 
         when: "al querer crear una tarea en un espacio incorrecto"
-        var tallerPrincipal = new Espacio(nombre: "Living principal", cmCuadrados: 90, tipo: tipoEspacioTaller)
+        var tallerPrincipal = new Espacio("Living principal", 90, tipoEspacioTaller)
         def tareaCreada = new Tarea("Trapear el living", tipoTareaTrapearLiving, tallerPrincipal,
                 LocalDate.parse("2022-10-02"))
 
