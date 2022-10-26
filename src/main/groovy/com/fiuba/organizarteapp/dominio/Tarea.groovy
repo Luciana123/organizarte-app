@@ -1,6 +1,6 @@
 package com.fiuba.organizarteapp.dominio
 
-
+import com.fiuba.organizarteapp.dominio.excepciones.OperacionNoPermitidaException
 import com.fiuba.organizarteapp.dominio.excepciones.TareaInvalidaException
 
 import java.time.LocalDate
@@ -57,7 +57,11 @@ class Tarea {
     }
 
     def marcarRealizada() {
-        this.estado = Estado.Realizada
+        if (this.asignado != null) {
+            this.estado = Estado.Realizada
+        } else {
+            throw new OperacionNoPermitidaException("La tara no tiene usuarios asignados para que puedan realizarla.")
+        }
     }
 
     def anularRealizacion() {

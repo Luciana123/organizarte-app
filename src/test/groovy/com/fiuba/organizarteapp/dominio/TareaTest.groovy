@@ -1,5 +1,6 @@
 package com.fiuba.organizarteapp.dominio
 
+import com.fiuba.organizarteapp.dominio.excepciones.OperacionNoPermitidaException
 import com.fiuba.organizarteapp.dominio.excepciones.TareaInvalidaException
 import spock.lang.Specification
 
@@ -58,6 +59,37 @@ class TareaTest extends Specification {
         assert tareaCreada.puntos == 15
     }
 
+    void "Realizacion de una tarea"() {
+        given: "que un integrante esta asignado a una tarea"
+
+        def tipoTareaHacerCompras = new TipoTarea("Hacer compras", "Ir al supermercado a hacer las compras",
+                7, 15, 70)
+        def tareaCreada = new Tarea("Hacer las compras de la casa - 1212",
+                tipoTareaHacerCompras, LocalDate.parse("2022-10-02"))
+        tareaCreada.asignado = new Integrante()
+
+        when: "al marcar la tarea como realizada"
+        tareaCreada.marcarRealizada()
+
+        then: "la tarea cambia su estado a realizado"
+        assert tareaCreada.estado == Estado.Realizada
+    }
+
+    void "Realizacion de una tarea no asignada"() {
+        given: "que una tarea no tiene integrante asignado"
+
+        def tipoTareaHacerCompras = new TipoTarea("Hacer compras", "Ir al supermercado a hacer las compras",
+                7, 15, 70)
+        def tareaCreada = new Tarea("Hacer las compras de la casa - 1212",
+                tipoTareaHacerCompras, LocalDate.parse("2022-10-02"))
+
+        when: "al marcar la tarea como realizada"
+        tareaCreada.marcarRealizada()
+
+        then: "se arroja una excepción"
+        def exception = thrown(OperacionNoPermitidaException)
+        exception != null
+    }
 
 
 }
