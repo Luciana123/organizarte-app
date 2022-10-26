@@ -45,13 +45,13 @@ class Tarea {
 
     def actualizar(LocalDate today) {
         // Si la tarea venció la hago más pesada.
-        if (this.fechaVencimiento > today && this.estado != Estado.Realizada) {
+        if (this.fechaVencimiento.isBefore(today)  && this.estado != Estado.Realizada) {
             puntos = this.puntos + 1
             this.fechaVencimiento = today.plusDays(tipo.periodicidad)
         }
 
         // Si la tarea ya venció y está realizada, la finalizo
-        if (this.fechaVencimiento > today && this.estado == Estado.Realizada) {
+        if (this.fechaVencimiento.isBefore(today)  && this.estado == Estado.Realizada) {
             this.estado = Estado.Finalizada
         }
     }

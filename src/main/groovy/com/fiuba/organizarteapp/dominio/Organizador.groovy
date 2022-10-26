@@ -20,16 +20,15 @@ class Organizador {
         h.tareas.findAll {
             it.estado == Estado.Finalizada
         }.each {
-
-            Tarea t = new Tarea(it.nombre, it.tipo, it.espacio, hoy)
-            t.asignado.sumarPuntos(t.puntos)
-
+            it.asignado.sumarPuntos(it.puntos)
+            Tarea t = it.espacio?new Tarea(it.nombre, it.tipo, it.espacio, hoy):new Tarea(it.nombre, it.tipo, hoy)
             t.asignar(h.siguienteIntegrante(it.asignado))
-            nuevasTareas.add(new Tarea(it.nombre, it.tipo, it.espacio, hoy))
+            nuevasTareas.add(t)
         }
 
+        h.tareas.addAll(nuevasTareas)
         // Borro tareas finalizadas
-        h.tareas.removeAll { it.fechaVencimiento > hoy && it.estado == Estado.Realizada }
+        h.tareas.removeAll {it.estado == Estado.Finalizada }
 
         // Actualizo competencia de haber
         h.competenciaEnCurso.each { it.actualizar(hoy) }
