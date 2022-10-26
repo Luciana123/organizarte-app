@@ -14,7 +14,6 @@ class HogarTest extends Specification {
         def hogar = integrante.crearHogar("Familia Addams")
         then: "se crea el hogar exitosamente"
         assert hogar != null
-        assert hogar.administradores.contains(integrante)
     }
 
 }

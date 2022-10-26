@@ -51,15 +51,24 @@ class Hogar {
     }
 
     def crearTareasDeHogar(LocalDate hoy) {
-        tipoTareas.each {
+        // Crear tareas SOLO crea las tareas que no fueron creadas con
+        // anterioridad, es decir, las tareas nuevas.
+        var tipoTareasCreadas = tareas.each { it.tipo }
+        var tareasNuevas = []
+        tipoTareas.findAll {
+            !tipoTareasCreadas.contains(it)
+        }.each {
             var nombreTareaDeHogar = this.nombre + "-" + it.nombre
-            tareas.add(new Tarea(nombreTareaDeHogar, it, hoy))
+            tareasNuevas.add(new Tarea(nombreTareaDeHogar, it, hoy))
         }
+        tareas.addAll(tareasNuevas)
+        return tareasNuevas
     }
 
     def siguienteIntegrante(Integrante i) {
         Integer idx = integrantes.indexOf(i)
-        Integrante next = integrantes.get(idx + 1 % integrantes.size())
+        idx = (idx + 1) % (integrantes.size())
+        Integrante next = integrantes.get(idx)
         return next
     }
 

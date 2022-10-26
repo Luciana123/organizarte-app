@@ -31,6 +31,7 @@ class Organizador {
         // Borro tareas finalizadas
         h.tareas.removeAll { it.fechaVencimiento > hoy && it.estado == Estado.Realizada }
 
+        // Actualizo competencia de haber
         h.competenciaEnCurso.each { it.actualizar(hoy) }
 
     }

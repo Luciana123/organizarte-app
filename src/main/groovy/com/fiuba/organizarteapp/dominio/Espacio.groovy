@@ -16,16 +16,19 @@ class Espacio {
         this.tipo = tipoEspacio
     }
 
-    def crearTareas(Hogar h, LocalDate hoy) {
+    List<Tarea> crearTareas(Hogar h, LocalDate hoy) {
         // Crear tareas SOLO crea las tareas que no fueron creadas con
         // anterioridad, es decir, las tareas nuevas.
         var tipoTareasCreadas = tareas.each { it.tipo }
+        var tareasNuevas = []
         tipo.tipoTareas.findAll {
             !tipoTareasCreadas.contains(it)
         }.each {
             var nombreTareaDeEspacio = h.nombre + "-" + this.nombre + "-" + it.nombre
-            tareas.add(new Tarea(nombreTareaDeEspacio, it, this, hoy))
+            tareasNuevas.add(new Tarea(nombreTareaDeEspacio, it, this, hoy))
         }
+        tareas.addAll(tareasNuevas)
+        return tareasNuevas
     }
 
 }
