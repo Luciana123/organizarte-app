@@ -6,12 +6,15 @@ import java.time.LocalDate
 
 class Hogar {
 
+    Integer id
     String nombre
-    List<Integrante> integrantes = []
+    Set<Integrante> integrantes = []
     Set<Integrante> administradores = []
-    Set<TipoTarea> tipoTareas = []
     Set<Espacio> espacios = []
+
+    // No contemplo tareas de Hogar en el MVP.
     Set<Tarea> tareas = []
+    Set<TipoTarea> tipoTareas = []
 
     Competencia competenciaEnCurso = null
 
@@ -66,9 +69,9 @@ class Hogar {
     }
 
     def siguienteIntegrante(Integrante i) {
-        Integer idx = integrantes.indexOf(i)
+        Integer idx = integrantes.sort().findIndexOf { it.id == i.id }
         idx = (idx + 1) % (integrantes.size())
-        Integrante next = integrantes.get(idx)
+        Integrante next = integrantes.sort()[idx]
         return next
     }
 

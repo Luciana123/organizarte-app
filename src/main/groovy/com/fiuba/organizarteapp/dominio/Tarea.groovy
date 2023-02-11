@@ -7,6 +7,7 @@ import java.time.LocalDate
 
 class Tarea {
 
+    Integer id
     String nombre
     LocalDate fechaVencimiento
     TipoTarea tipo
@@ -14,6 +15,8 @@ class Tarea {
     Espacio espacio
     Estado estado
     Integrante asignado
+
+    Tarea() {}
 
     Tarea(String nombre, TipoTarea tipo, Espacio espacio, LocalDate hoy) {
         this.nombre = nombre
@@ -54,6 +57,10 @@ class Tarea {
         if (this.fechaVencimiento.isBefore(today)  && this.estado == Estado.Realizada) {
             this.estado = Estado.Finalizada
         }
+    }
+
+    def esTareaRealizada() {
+        return this.estado == Estado.Realizada
     }
 
     def marcarRealizada() {

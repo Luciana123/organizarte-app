@@ -7,17 +7,13 @@ import java.time.LocalDate
 
 class Integrante {
 
+    Integer id
     String nombre
     LocalDate fechaNacimiento
     Hogar hogar
 
     Integer puntosCompetencia = 0
     boolean enCompetencia = false
-
-    Integrante() {
-        this.nombre = nombre
-        this.fechaNacimiento = fechaNacimiento
-    }
 
     def crearHogar(String nombre) {
         if (this.hogar == null) {

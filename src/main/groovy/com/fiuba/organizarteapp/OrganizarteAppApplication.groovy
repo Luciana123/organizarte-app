@@ -9,17 +9,6 @@ class OrganizarteAppApplication {
 
     static void main(String[] args) {
         SpringApplication.run(OrganizarteAppApplication, args)
-
-        // Crear TipoEspacios defaults:
-        // Baño
-        // Living
-        // Cocina
-        // Balcon
-        // Cuarto
-
-        List tipoEspacios = []
-        var baño = new TipoEspacio(nombre: "Baño")
-        var cocina = new TipoEspacio(nombre: "Cocina")
     }
 
 }

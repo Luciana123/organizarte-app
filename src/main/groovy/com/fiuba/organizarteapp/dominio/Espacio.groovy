@@ -4,6 +4,7 @@ import java.time.LocalDate
 
 class Espacio {
 
+    Integer id
     String nombre
     Integer cmCuadrados
     TipoEspacio tipo

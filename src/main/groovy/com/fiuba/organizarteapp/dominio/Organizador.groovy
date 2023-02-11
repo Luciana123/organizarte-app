@@ -5,7 +5,7 @@ import java.time.LocalDate
 class Organizador {
 
     // Job encargado de avanzar el día cuando son las 00:00 para actualizar las tareas en el hogar.
-    def avanzarDia(Hogar h, LocalDate hoy) {
+    static def avanzarDia(Hogar h, LocalDate hoy) {
         // Se actualizan todas las tareas a las 00:00 hs de cada dia.
 
         // Actualizo tareas
