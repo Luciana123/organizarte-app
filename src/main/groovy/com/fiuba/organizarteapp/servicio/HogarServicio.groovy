@@ -50,12 +50,11 @@ class HogarServicio {
         he.nombre = nombre
         def saved = this.hogarRepository.save(he)
 
-        i.id = administrador.id
-        i.nombre = administrador.nombre
-        i.hogarId = saved.id
-        i.esAdmin = true
+        def integranteToUpdate = this.integranteRepository.getReferenceById(administrador.id)
+        integranteToUpdate.esAdmin = true
+        integranteToUpdate.hogarId = saved.id
 
-        this.integranteRepository.save(i)
+        this.integranteRepository.save(integranteToUpdate)
         return saved
     }
 

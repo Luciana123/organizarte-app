@@ -53,9 +53,10 @@ class EspacioConstructor {
             tarea.nombre = te.nombre
             tarea.tipo = tipoTarea
             tarea.espacio = e
+            e.tareas.add(tarea)
 
-            integrantes.find { ie ->
-                ie.id == te.id
+            integrantes.find { integrante ->
+                integrante.id == te.integranteId
             }.each { ie ->
                 tarea.asignar(ie)
             }

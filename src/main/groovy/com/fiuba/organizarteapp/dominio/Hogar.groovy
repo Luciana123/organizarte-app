@@ -87,5 +87,10 @@ class Hogar {
         competenciaEnCurso = null
     }
 
+    def contieneTarea(Tarea tarea) {
+        return this.espacios.any{
+            it.tareas.contains(tarea)
+        } || this.tareas.contains(tarea)
+    }
 
 }

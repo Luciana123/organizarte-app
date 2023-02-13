@@ -1,20 +1,24 @@
 import './App.css';
-import 'fontsource-roboto';
-import { Routes, Route, Navigate } from "react-router-dom";
-import { ThemeProvider } from '@mui/material/styles';
-import Login from 'screens/Login';
-import theme from './styles/theme';
-
-
+import { Navigate, Routes, Route, BrowserRouter as Router } from "react-router-dom";
+import Login from './screens/Login';
+import HomeScreen from './screens/Home';
+import HogarScreen from './screens/Hogar';
+import IntegrantesScreen from './screens/Integrantes';
+import TareasScreen from './screens/Tareas';
 
 function App() {
 
   return (
-    <ThemeProvider theme={theme}>
-          <Routes>
-            <Route path="/" element={<Login />} />
-          </Routes>
-    </ThemeProvider>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<HomeScreen />} />
+        <Route path="/hogar" element={<HogarScreen />} />
+        <Route path="/integrantes" element={<IntegrantesScreen />} />
+        <Route path="/tareas" element={<TareasScreen />} />
+        <Route path="/logout" element={<Navigate to="/"/>} />
+      </Routes>
+    </Router>
   );
 }
 

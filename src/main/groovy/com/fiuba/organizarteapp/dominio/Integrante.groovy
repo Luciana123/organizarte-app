@@ -95,7 +95,7 @@ class Integrante {
     }
 
     def realizarTarea(Tarea t) {
-        if(t.asignado == this && hogar.tareas.contains(t)){
+        if(t.asignado == this && hogar.contieneTarea(t)){
             t.marcarRealizada()
         }
     }

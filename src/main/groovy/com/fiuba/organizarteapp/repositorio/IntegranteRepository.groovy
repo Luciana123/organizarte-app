@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface IntegranteRepository extends JpaRepository<IntegranteEntity, Integer> {
     List<IntegranteEntity> getIntegranteByHogarId(Integer hogarId);
+    List<IntegranteEntity> getIntegranteByNombre(String nombre);
 }

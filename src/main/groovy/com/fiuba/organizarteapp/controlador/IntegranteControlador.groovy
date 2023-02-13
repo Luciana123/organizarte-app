@@ -28,5 +28,10 @@ class IntegranteControlador {
         this.servicio.obtener(integranteId)
     }
 
+    @GetMapping("/{nombre}")
+    getPorNombre(@PathVariable String nombre){
+        this.servicio.obtener(nombre)
+    }
+
 
 }

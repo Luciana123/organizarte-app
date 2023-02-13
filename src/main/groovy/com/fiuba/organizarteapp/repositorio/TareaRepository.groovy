@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface TareaRepository extends JpaRepository<TareaEntity, Integer> {
     List<TareaEntity> getTareaByEspacioId(Integer espacioId);
+    List<TareaEntity> getTareasByIntegranteId(Integer integranteId);
 }
